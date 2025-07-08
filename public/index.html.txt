@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jadwal Tugas Otomatis</title>
+    <!-- CSS bisa ditaruh di file terpisah atau di sini -->
+    <style>
+        /* Salin CSS dari jawaban sebelumnya di sini */
+        body { font-family: sans-serif; background-color: #f4f4f9; color: #333; }
+        .container { max-width: 600px; margin: 50px auto; padding: 20px; background: #fff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { text-align: center; }
+        .task-form { display: flex; gap: 10px; margin-bottom: 20px; }
+        .task-form input[type="text"] { flex-grow: 1; padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
+        .task-form input[type="datetime-local"] { padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
+        .task-form button { padding: 10px 15px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        .task-list { list-style: none; padding: 0; }
+        .task-item { background: #e9ecef; padding: 15px; margin-bottom: 10px; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; transition: all 0.3s ease; }
+        .task-item.completed { background-color: #d4edda; color: #155724; text-decoration: line-through; }
+        .task-item.completed .countdown { display: none; }
+        .task-item.completed::before { content: '✔'; font-weight: bold; margin-right: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Jadwal Tugas</h1>
+        <div class="task-form">
+            <input type="text" id="taskInput" placeholder="Masukkan deskripsi tugas...">
+            <input type="datetime-local" id="timeInput">
+            <button id="addButton">Simpan Jadwal</button>
+        </div>
+        <ul id="taskList" class="task-list"></ul>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
