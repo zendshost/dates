@@ -5,7 +5,7 @@ const fs = require('fs'); // Modul 'File System' untuk bekerja dengan file
 const path = require('path');
 
 const app = express();
-const PORT = 3000;
+const PORT = 3005;
 const DB_PATH = path.join(__dirname, 'database.json');
 
 // Middleware untuk membaca JSON dari request body
