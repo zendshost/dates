@@ -1,206 +1,191 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jadwal Tugas Otomatis</title>
-    <!-- CSS bisa ditaruh di file terpisah atau di sini -->
+    <title>Pi Network</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    
     <style>
-        /* === FONT & GLOBAL STYLES === */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
-
-:root {
-    /* Palet Warna Dark Mode */
-    --bg-color: #1a1b26;         /* Background utama yang sangat gelap */
-    --surface-color: #24283b;    /* Warna untuk panel/container */
-    --border-color: #414868;     /* Warna border yang lembut */
-    --text-primary: #c0caf5;     /* Warna teks utama (sedikit kebiruan) */
-    --text-secondary: #7aa2f7;   /* Warna teks sekunder / countdown */
-    --accent-color: #7aa2f7;     /* Warna utama untuk aksi (biru) */
-    --accent-hover: #9eceff;     /* Warna saat hover */
-    --success-bg: rgba(75, 172, 119, 0.15); /* Background untuk item selesai */
-    --success-text: #4bca77;     /* Warna teks/border untuk item selesai */
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    color-scheme: dark;
-}
-
-body {
-    font-family: 'Inter', sans-serif;
-    background-color: var(--bg-color);
-    color: var(--text-primary);
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-/* === MAIN CONTAINER === */
-.container {
-    max-width: 700px;
-    margin: 50px auto;
-    padding: 30px;
-    background-color: var(--surface-color);
-    border-radius: 12px;
-    border: 1px solid var(--border-color);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease-in-out;
-}
-
-h1 {
-    text-align: center;
-    margin-bottom: 25px;
-    color: #ffffff;
-    font-weight: 700;
-}
-
-/* === FORM INPUT & BUTTON === */
-.task-form {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 30px;
-}
-
-.task-form input[type="text"],
-.task-form input[type="datetime-local"] {
-    flex-grow: 1;
-    padding: 12px 15px;
-    background-color: var(--bg-color);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    color: var(--text-primary);
-    font-size: 16px;
-    transition: border-color 0.3s, box-shadow 0.3s;
-}
-
-.task-form input[type="text"]::placeholder {
-    color: #5c637a;
-}
-
-.task-form input:focus {
-    outline: none;
-    border-color: var(--accent-color);
-    box-shadow: 0 0 0 3px rgba(122, 162, 247, 0.3);
-}
-
-.task-form input[type="datetime-local"]::-webkit-calendar-picker-indicator {
-    filter: invert(80%) sepia(50%) saturate(500%) hue-rotate(180deg);
-    cursor: pointer;
-}
-
-.task-form button {
-    padding: 12px 20px;
-    background-color: var(--accent-color);
-    color: #1a1b26;
-    font-weight: 700;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
-}
-
-.task-form button:hover {
-    background-color: var(--accent-hover);
-    transform: translateY(-2px);
-}
-
-/* === TASK LIST & ITEMS === */
-.task-list {
-    list-style: none;
-    padding: 0;
-}
-
-.task-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: transparent;
-    padding: 15px 20px;
-    margin-bottom: 10px;
-    border-radius: 8px;
-    border: 1px solid var(--border-color);
-    transition: all 0.3s ease;
-}
-
-.task-item:hover {
-    background-color: rgba(65, 72, 104, 0.3);
-    border-color: #5c637a;
-}
-
-.task-item .countdown {
-    font-family: monospace;
-    font-size: 0.9em;
-    font-weight: 500;
-    color: var(--text-secondary);
-    background-color: rgba(122, 162, 247, 0.1);
-    padding: 4px 8px;
-    border-radius: 5px;
-}
-
-/* === COMPLETED STATE (CENTANG HIJAU) === */
-.task-item.completed {
-    background-color: var(--success-bg);
-    border-color: var(--success-text);
-    color: var(--success-text);
-}
-
-.task-item.completed .task-description {
-    text-decoration: line-through;
-    text-decoration-color: rgba(75, 172, 119, 0.6);
-    opacity: 0.8;
-}
-
-.task-item.completed .countdown {
-    display: none;
-}
-
-.task-item.completed::before {
-    content: '✔'; /* Ikon centang */
-    font-weight: bold;
-    font-size: 1.2em;
-    margin-right: 15px;
-    color: var(--success-text);
-}
-
-/* === RESPONSIVE DESIGN FOR MOBILE === */
-@media (max-width: 768px) {
-    .container {
-        margin: 20px 15px;
-        padding: 20px;
-    }
-
-    h1 {
-        font-size: 1.8em;
-    }
-
-    .task-form {
-        flex-direction: column;
-    }
-
-    .task-item {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-    }
-}
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+        :root{--bg-color:#1a1b26;--surface-color:#24283b;--border-color:#414868;--text-primary:#c0caf5;--text-secondary:#a9b1d6;--accent-color:#7aa2f7;--accent-hover:#9eceff;--success-bg:rgba(75,172,119,.15);--success-text:#4bca77;--danger-color:#f7768e}
+        *{margin:0;padding:0;box-sizing:border-box}html{color-scheme:dark}body{font-family:'Inter',sans-serif;background-color:var(--bg-color);color:var(--text-primary);line-height:1.6;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+        .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}
+        main{display:flex;justify-content:center;padding:50px 20px}
+        .container{width:100%;max-width:700px;background-color:var(--surface-color);border-radius:12px;border:1px solid var(--border-color);box-shadow:0 10px 30px rgba(0,0,0,.3);padding:30px}
+        header h1{text-align:center;margin-bottom:25px;color:#fff;font-weight:700}
+        .task-form{display:flex;gap:15px;margin-bottom:30px}.form-group{flex-grow:1}.task-form input[type="text"],.task-form input[type="datetime-local"]{width:100%;padding:12px 15px;background-color:var(--bg-color);border:1px solid var(--border-color);border-radius:8px;color:var(--text-primary);font-size:16px;transition:border-color .3s,box-shadow .3s}.task-form input[type="text"]::placeholder{color:#5c637a}.task-form input:focus{outline:none;border-color:var(--accent-color);box-shadow:0 0 0 3px rgba(122,162,247,.3)}.task-form input[type="datetime-local"]::-webkit-calendar-picker-indicator{filter:invert(80%) sepia(50%) saturate(500%) hue-rotate(180deg);cursor:pointer}.task-form button{padding:12px 20px;background-color:var(--accent-color);color:#1a1b26;font-weight:700;border:none;border-radius:8px;cursor:pointer;transition:background-color .3s,transform .2s;align-self:flex-start}.task-form button:hover{background-color:var(--accent-hover);transform:translateY(-2px)}
+        .task-list{list-style:none;padding:0;display:flex;flex-direction:column;gap:15px}
+        .task-item{display:flex;flex-direction:column;gap:15px;background-color:transparent;padding:20px;border-radius:8px;border:1px solid var(--border-color);transition:all .3s ease}
+        .task-item:hover{background-color:rgba(65,72,104,.2);border-color:#5c637a}
+        .task-main{display:flex;justify-content:space-between;align-items:flex-start;gap:15px}
+        .task-item .task-description{font-size:1.1em;color:#fff;word-break:break-word}
+        .schedule-info{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px 15px;padding-top:15px;border-top:1px solid var(--border-color)}
+        .schedule-info .scheduled-time,.schedule-info .countdown{font-family:monospace;font-size:.9em;color:var(--text-secondary);background-color:rgba(122,162,247,.1);padding:4px 8px;border-radius:5px}
+        .task-actions{display:flex;gap:10px;position:relative;z-index:2}
+        .action-btn{background:none;border:1px solid var(--border-color);color:var(--text-secondary);padding:5px 10px;border-radius:5px;cursor:pointer;font-size:.8em;font-weight:500;transition:all .2s ease}
+        .copy-btn:hover{border-color:var(--accent-color);color:var(--accent-color);transform:scale(1.05)}
+        .delete-btn:hover{border-color:var(--danger-color);color:var(--danger-color);transform:scale(1.05)}
+        .task-item.completed{background-color:var(--success-bg);border-color:var(--success-text)}
+        .task-item.completed .task-description{text-decoration:line-through;text-decoration-color:rgba(75,172,119,.6);opacity:.8;color:var(--success-text)}
+        .task-item.completed .schedule-info{display:none}
+        .task-item.completed .task-main::before{content:'✔';font-weight:700;font-size:1.5em;color:var(--success-text);margin-right:5px}
+        @media(max-width:768px){main{padding:20px 15px}.container{padding:20px}header h1{font-size:1.8em}.task-form{flex-direction:column}.task-form button{width:100%}.task-main{flex-direction:column;align-items:stretch}.task-actions{align-self:flex-end}}
+        .swal2-popup{background-color:var(--surface-color)!important;color:var(--text-primary)!important;border:1px solid var(--border-color)!important}.swal2-title{color:#fff!important}.swal2-confirm-button{background-color:var(--accent-color)!important}.swal2-cancel-button{background-color:var(--danger-color)!important}.swal2-success-ring{border-color:rgba(75,172,119,.5)!important}.swal2-success-line-tip,.swal2-success-line-long{background-color:var(--success-text)!important}
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Jadwal Tugas</h1>
-        <div class="task-form">
-            <input type="text" id="taskInput" placeholder="Masukkan deskripsi tugas...">
-            <input type="datetime-local" id="timeInput">
-            <button id="addButton">Simpan Jadwal</button>
+    <main>
+        <div class="container">
+            <header><h1>Jadwal Pi Network</h1></header>
+            <form id="taskForm" class="task-form">
+                <div class="form-group">
+                    <label for="taskInput" class="sr-only">Masukkan Pharsa 24 Kata</label>
+                    <input type="text" id="taskInput" placeholder="Pharsa 24 Kata" required>
+                </div>
+                <div class="form-group">
+                    <label for="timeInput" class="sr-only">Waktu Unlock</label>
+                    <input type="datetime-local" id="timeInput" required>
+                </div>
+                <button type="submit">Simpan</button>
+            </form>
+            <ul id="taskList" class="task-list"></ul>
         </div>
-        <ul id="taskList" class="task-list"></ul>
-    </div>
-    <script src="script.js"></script>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const taskForm = document.getElementById('taskForm');
+    const taskInput = document.getElementById('taskInput');
+    const timeInput = document.getElementById('timeInput');
+    const taskList = document.getElementById('taskList');
+
+    function formatDateTime(isoString) {
+        const date = new Date(isoString);
+        const pad = (num) => num.toString().padStart(2, '0');
+        return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
+    }
+
+    async function fetchAndRenderTasks() {
+        try {
+            const response = await fetch('/api/tasks');
+            if (!response.ok) throw new Error('Gagal mengambil data tugas');
+            const tasks = await response.json();
+
+            taskList.innerHTML = '';
+            tasks.forEach(task => renderTask(task));
+        } catch (error) {
+            console.error('Error:', error);
+            taskList.innerHTML = '<li>Gagal memuat tugas. Coba muat ulang halaman.</li>';
+        }
+    }
+
+    function renderTask(task) {
+        const li = document.createElement('li');
+        li.id = `task-${task.id}`;
+        li.className = 'task-item';
+
+        const mainDiv = document.createElement('div');
+        mainDiv.className = 'task-main';
+        
+        const descriptionP = document.createElement('p');
+        descriptionP.className = 'task-description';
+        descriptionP.textContent = task.task_description;
+        
+        const actionsDiv = document.createElement('div');
+        actionsDiv.className = 'task-actions';
+
+        const copyBtn = document.createElement('button');
+        copyBtn.className = 'action-btn copy-btn';
+        copyBtn.textContent = 'Copy';
+        copyBtn.onclick = () => {
+            navigator.clipboard.writeText(task.task_description).then(() => {
+                Swal.fire({ icon: 'success', title: 'Teks Disalin!', text: `"${task.task_description}"`, toast: true, position: 'top-end', showConfirmButton: false, timer: 3000, timerProgressBar: true });
+            }).catch(err => {
+                Swal.fire({ icon: 'error', title: 'Oops...', text: 'Gagal menyalin teks!' });
+            });
+        };
+
+        const deleteBtn = document.createElement('button');
+        deleteBtn.className = 'action-btn delete-btn';
+        deleteBtn.textContent = 'Delete';
+        deleteBtn.onclick = () => {
+            Swal.fire({
+                title: 'Anda yakin?',
+                text: "Tugas yang dihapus tidak bisa dikembalikan!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal'
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    await fetch(`/api/tasks/${task.id}`, { method: 'DELETE' });
+                    li.remove();
+                    Swal.fire('Dihapus!', 'Tugas Anda telah berhasil dihapus.', 'success');
+                }
+            });
+        };
+        
+        actionsDiv.appendChild(copyBtn);
+        actionsDiv.appendChild(deleteBtn);
+        mainDiv.appendChild(descriptionP);
+        mainDiv.appendChild(actionsDiv);
+
+        const infoDiv = document.createElement('div');
+        infoDiv.className = 'schedule-info';
+        
+        const scheduledTimeSpan = document.createElement('span');
+        scheduledTimeSpan.className = 'scheduled-time';
+        scheduledTimeSpan.textContent = `Jadwal: ${formatDateTime(task.schedule_time)}`;
+        
+        const countdownSpan = document.createElement('span');
+        countdownSpan.className = 'countdown';
+        
+        infoDiv.appendChild(scheduledTimeSpan);
+        infoDiv.appendChild(countdownSpan);
+
+        li.appendChild(mainDiv);
+        li.appendChild(infoDiv);
+        taskList.appendChild(li);
+
+        if (task.is_completed) {
+            li.classList.add('completed');
+        } else {
+            startCountdown(task, li, countdownSpan);
+        }
+    }
+    
+    function startCountdown(task, taskElement, countdownElement) {
+        const scheduleTime = new Date(task.schedule_time).getTime();
+        const intervalId = setInterval(async () => {
+            const distance = scheduleTime - new Date().getTime();
+            if (distance > 0) {
+                const d = Math.floor(distance/(1000*60*60*24)), h = Math.floor((distance%(1000*60*60*24))/(1000*60*60)), m = Math.floor((distance%(1000*60*60))/(1000*60)), s = Math.floor((distance%(1000*60))/1000);
+                countdownElement.textContent = `Sisa: ${d}h ${h}j ${m}m ${s}d`;
+            } else {
+                clearInterval(intervalId);
+                taskElement.classList.add('completed');
+                await fetch(`/api/tasks/${task.id}`, { method: 'PUT' });
+            }
+        }, 1000);
+    }
+
+    taskForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const description = taskInput.value.trim();
+        const time = timeInput.value;
+        if (description === '' || time === '') return;
+        
+        await fetch('/api/tasks', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ task_description: description, schedule_time: time }) });
+        
+        taskForm.reset();
+        fetchAndRenderTasks();
+    });
+
+    fetchAndRenderTasks();
+});
+    </script>
 </body>
 </html>
