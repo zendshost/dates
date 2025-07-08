@@ -4,7 +4,7 @@ const path = require('path');
 const fetch = require('node-fetch');
 
 const app = express();
-const PORT = 3005;
+const PORT = 3006;
 
 const DB_PATH = path.join(__dirname, 'database.json');
 const CONFIG_PATH = path.join(__dirname, 'telegrambot.json');
