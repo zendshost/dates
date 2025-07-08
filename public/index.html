@@ -98,6 +98,7 @@
   </div>
 </main>
 
+<audio id="notifySound" src="/unlock.mp3" preload="auto"></audio>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
@@ -105,6 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const taskInput = document.getElementById('taskInput');
   const timeInput = document.getElementById('timeInput');
   const taskList = document.getElementById('taskList');
+  const notifySound = document.getElementById('notifySound');
 
   function formatDateTime(isoString) {
     const date = new Date(isoString);
@@ -171,6 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (task.is_completed) {
       li.classList.add('completed');
+      countdown.textContent = '✅ Unlock';
     } else {
       startCountdown(task, li, countdown);
     }
@@ -185,16 +188,24 @@ document.addEventListener('DOMContentLoaded', () => {
       if (distance <= 0) {
         clearInterval(intervalId);
         taskElement.classList.add('completed');
+        countdownElement.textContent = '✅ Unlock';
+        notifySound.play();
         await fetch(`/api/tasks/${task.id}`, { method: 'PUT' });
+        await fetch('/api/notify', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: `✅ Mnemonic Unlocked:\n${task.task_description}` })
+        });
         return;
       }
 
-      const minutesLeft = Math.floor(distance / (1000 * 60));
-      const secondsLeft = Math.floor((distance % (1000 * 60)) / 1000);
-      if (distance <= 5 * 60 * 1000) {
-        countdownElement.textContent = `⚠️ 5 menit lagi akan unlock`;
+      const minutes = Math.floor(distance / 60000);
+      const seconds = Math.floor((distance % 60000) / 1000);
+
+      if (distance <= 5 * 60000) {
+        countdownElement.textContent = `⚠️ ${minutes} menit ${seconds} detik lagi akan unlock`;
       } else {
-        countdownElement.textContent = `Sisa: ${minutesLeft}m ${secondsLeft}s`;
+        countdownElement.textContent = `Sisa: ${minutes}m ${seconds}s`;
       }
     }, 1000);
   }
@@ -202,8 +213,8 @@ document.addEventListener('DOMContentLoaded', () => {
   taskForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const description = taskInput.value.trim();
-    const wordCount = description.split(/\s+/).filter(Boolean).length;
     const time = timeInput.value;
+    const wordCount = description.split(/\s+/).filter(Boolean).length;
 
     if (wordCount !== 24) {
       Swal.fire({ icon: 'error', title: 'Harus 24 kata!', text: 'Pharsa harus terdiri dari tepat 24 kata.' });
